@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 import UserTable from "./components/UserTable";
 import RoleManagement from "./components/RoleManagement";
 import PermissionGrid from "./components/PermissionGrid";
+import UserModal from "./components/UserModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,6 +15,7 @@ const App = () => {
         <UserTable />
         <RoleManagement />
         <PermissionGrid />
+        <UserModal />
         <ToastContainer />
       </div>
     </div>

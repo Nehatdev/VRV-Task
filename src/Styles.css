@@ -48,7 +48,6 @@ body {
     color: #fff;
 }
   
-/* Content Area */
 .content {
     margin-left: 250px;
     padding: 20px;
@@ -115,7 +114,6 @@ h2 {
     background-color: #c92a1d;
 }
   
-/* Modal Styling */
 .modal-header {
     background-color: #4e73df;
     color: #fff;
@@ -150,7 +148,6 @@ h2 {
     outline: none;
 }
   
-/* Cards for Permissions */
 .card {
     border: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -175,7 +172,6 @@ h2 {
     margin-bottom: 0;
 }
   
-/* Animations */
 @keyframes fadeIn {
     from {
       opacity: 0;
@@ -191,8 +187,7 @@ h2 {
 .content {
     animation: fadeIn 0.5s ease-out;
 }
-  
-/* Responsive Design */
+ 
 @media (max-width: 768px) {
     .sidebar {
       width: 100%;

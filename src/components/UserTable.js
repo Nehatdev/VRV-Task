@@ -6,14 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(5); // Number of users per page
+  const [usersPerPage] = useState(5);
   const [showModal, setShowModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "id", direction: "asc" });
 
   useEffect(() => {
-    // Fetch data from API
     fetch("http://localhost:3000/users")
       .then((res) => res.json())
       .then((data) => setUsers(data))
@@ -24,10 +23,12 @@ const UserTable = () => {
     setCurrentUser(user);
     setShowModal(true);
   };
-
+  const handleClose = () => {
+    setCurrentUser(null);
+    setShowModal(false);
+  };
   const handleSave = (user) => {
     if (user.id) {
-      // Edit user
       fetch(`http://localhost:3000/users/${user.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -39,7 +40,6 @@ const UserTable = () => {
         })
         .catch(() => toast.error("Failed to update user"));
     } else {
-      // Add new user
       fetch("http://localhost:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,22 +63,18 @@ const UserTable = () => {
       })
       .catch(() => toast.error("Failed to delete user"));
   };
-
-  // Filtered Users
   const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Sorted Users
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === "asc" ? -1 : 1;
     if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === "asc" ? 1 : -1;
     return 0;
   });
 
-  // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
@@ -94,24 +90,28 @@ const UserTable = () => {
 
   return (
     <div className="p-4" id="users">
-      {/* Toast Notification */}
-      <ToastContainer />
 
-      {/* Search Bar */}
+      <ToastContainer
+        autoClose={2000}
+        position="top-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
       <input
         type="text"
         className="form-control mb-3"
-        style={{ width: "50%", margin: "0 auto" }} // Adjusted search bar size
+        style={{ width: "50%", margin: "0 auto" }}
         placeholder="Search users..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
       <h2>User Management</h2>
       <button className="btn btn-primary mb-3" onClick={() => handleShow()}>
         Add User
       </button>
-
       <table className="table table-bordered">
         <thead>
           <tr>
@@ -149,8 +149,6 @@ const UserTable = () => {
           ))}
         </tbody>
       </table>
-
-      {/* Pagination Controls */}
       <nav>
         <ul className="pagination">
           {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }, (_, i) => (
@@ -165,10 +163,11 @@ const UserTable = () => {
 
       <UserModal
         show={showModal}
-        handleClose={() => setShowModal(false)}
+        handleClose={handleClose}
         saveUser={handleSave}
         currentUser={currentUser}
       />
+
     </div>
   );
 };

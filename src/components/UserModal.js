@@ -9,7 +9,6 @@ const UserModal = ({ show, handleClose, saveUser, currentUser }) => {
     role: "User",
   });
 
-  // Populate form data when currentUser changes
   useEffect(() => {
     if (currentUser) {
       setFormData({
@@ -27,26 +26,36 @@ const UserModal = ({ show, handleClose, saveUser, currentUser }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     saveUser({ ...currentUser, ...formData });
+    handleClose();
   };
-
-  if (!show) return null; // Prevent rendering when the modal is not shown
-
+  if (!show) return null;
   return (
-    <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+    <div
+      className="modal d-block"
+      tabIndex="-1"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      role="dialog"
+    >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{currentUser ? "Edit User" : "Add User"}</h5>
-            <button type="button" className="btn-close" onClick={handleClose}></button>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={handleClose}
+              aria-label="Close"
+            ></button>
           </div>
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
                 <input
                   type="text"
                   id="name"
@@ -58,7 +67,9 @@ const UserModal = ({ show, handleClose, saveUser, currentUser }) => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
                 <input
                   type="email"
                   id="email"
@@ -70,7 +81,9 @@ const UserModal = ({ show, handleClose, saveUser, currentUser }) => {
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="status" className="form-label">Status</label>
+                <label htmlFor="status" className="form-label">
+                  Status
+                </label>
                 <select
                   id="status"
                   name="status"
@@ -83,7 +96,9 @@ const UserModal = ({ show, handleClose, saveUser, currentUser }) => {
                 </select>
               </div>
               <div className="mb-3">
-                <label htmlFor="role" className="form-label">Role</label>
+                <label htmlFor="role" className="form-label">
+                  Role
+                </label>
                 <select
                   id="role"
                   name="role"

@@ -1,4 +1,5 @@
 import React from "react";
+
 const PermissionGrid = () => {
   const permissions = ["Read", "Write", "Delete"];
   return (
