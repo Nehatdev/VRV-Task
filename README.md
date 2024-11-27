@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# User Management Table
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based application for managing user data. It provides functionalities to view, add, edit, delete, search, and sort users with a user-friendly interface.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+1. **Display User List**
+   - Users are displayed in a table format with fields:
+     - ID
+     - Name
+     - Email
+     - Status
+     - Role
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Search**
+   - Real-time search by name or email using an input field.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Pagination**
+   - Displays users in pages with controls to navigate between pages.
 
-### `npm test`
+4. **Sorting**
+   - Clickable table headers sort users by the respective field (ID, name, email, etc.).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Add User**
+   - Opens a modal to add a new user.
+   - Newly added users are POSTed to the server and added to the UI.
 
-### `npm run build`
+6. **Edit User**
+   - Opens a modal pre-filled with user data for editing.
+   - Updates are saved using the PUT request.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+7. **Delete User**
+   - Deletes a user via DELETE request and removes them from the UI.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+8. **Toast Notifications**
+   - Displays success or error messages for add, edit, delete, and fetch operations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Main Files
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **`UserTable.jsx`**
+   - Handles user data fetching, displaying the user table, and managing interactions (add, edit, delete, search, and sort).
+2. **`UserModal.jsx`**
+   - A modal component used for adding or editing user information.
+3. **Other Dependencies**
+   - `react-toastify`: Displays toast notifications for user interactions.
+   - Fetch API: Handles data fetching from a mock server (`http://localhost:3000/users`).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How It Works
 
-## Learn More
+### State Management
+- **Users:** Stores the list of user objects.
+- **Current Page:** Tracks the active page in pagination.
+- **Search Term:** Filters the displayed users based on input.
+- **Sort Configuration:** Keeps track of the field and order (ascending/descending) for sorting.
+- **Modal States:**
+  - `showModal`: Boolean to toggle the modal's visibility.
+  - `currentUser`: Stores data for the user being edited.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### API Operations
+- **GET Users:** Fetches the initial list of users from the API.
+- **POST User:** Adds a new user to the API.
+- **PUT User:** Updates an existing user's data in the API.
+- **DELETE User:** Removes a user from the API.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
